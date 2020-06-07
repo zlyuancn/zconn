@@ -29,6 +29,7 @@ type ConnType string
 const (
     // 在这里定义连接器类型
     Xorm ConnType = "xorm"
+    Gorm          = "gorm"
 )
 
 var connectorRegistry map[ConnType]IConnector
@@ -38,6 +39,7 @@ func init() {
 
     // 在这里注册连接器
     RegistryConnector(Xorm, new(XormConnector))
+    RegistryConnector(Gorm, new(GormConnector))
 }
 
 // 注册自定义连接器
