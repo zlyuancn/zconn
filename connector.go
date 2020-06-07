@@ -19,7 +19,7 @@ type IConnector interface {
     // 根据配置结构进行连接, 返回一个连接实例
     //
     // 注意, conf 一定是带指针的
-    Connect(conf interface{}) (instance interface{}, err error)
+    Connect(config interface{}) (instance interface{}, err error)
     // 关闭连接实例
     Close(instance interface{}) error
 }
@@ -27,8 +27,8 @@ type IConnector interface {
 type ConnType string
 
 const (
-// 在这里定义连接器类型
-
+    // 在这里定义连接器类型
+    Xorm ConnType = "xorm"
 )
 
 var connectorRegistry map[ConnType]IConnector
@@ -37,7 +37,7 @@ func init() {
     connectorRegistry = make(map[ConnType]IConnector)
 
     // 在这里注册连接器
-
+    RegistryConnector(Xorm, new(XormConnector))
 }
 
 // 注册自定义连接器

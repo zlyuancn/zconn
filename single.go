@@ -9,6 +9,8 @@
 package zconn
 
 import (
+    "fmt"
+
     "github.com/spf13/viper"
 )
 
@@ -47,4 +49,16 @@ func AddFile(file string, filetype ...string) error {
 // 添加viper树
 func AddViperTree(tree *viper.Viper) error {
     return defaultManager.AddViperTree(tree)
+}
+
+func panicOnErr(err error) {
+    if err != nil {
+        panic(err)
+    }
+}
+
+func panicOnErrf(err error, format string, msg ...interface{}) {
+    if err != nil {
+        panic(fmt.Sprintf("%s: %s", fmt.Sprintf(format, msg...), err))
+    }
 }

@@ -9,10 +9,16 @@
 package zconn
 
 import (
+    "errors"
     "fmt"
     "reflect"
     "strings"
     "sync"
+)
+
+var (
+    ErrNoConn           = errors.New("没有这个conn")
+    ErrConnNotConnected = errors.New("conn未连接")
 )
 
 type Conns map[string]*Conn
