@@ -33,6 +33,7 @@ const (
     Es6            = "es6"
     Es7            = "es7"
     Etcd3          = "etcd"
+    Mongo          = "mongo"
 )
 
 var connectorRegistry map[ConnType]IConnector
@@ -46,6 +47,7 @@ func init() {
     RegistryConnector(Es6, new(es6Connector))
     RegistryConnector(Es7, new(es7Connector))
     RegistryConnector(Etcd3, new(etcd3Connector))
+    RegistryConnector(Mongo, new(mongoConnector))
 }
 
 // 注册自定义连接器

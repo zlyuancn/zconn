@@ -15,6 +15,7 @@ require (
 	github.com/olivere/elastic v6.2.33+incompatible // indirect
 	github.com/olivere/elastic/v7 v7.0.17
 	github.com/spf13/viper v1.7.0
+	github.com/zlyuancn/zmongo v0.0.0-20200514024631-d1974387d01e
 	go.etcd.io/etcd v3.3.22+incompatible
 	gopkg.in/olivere/elastic.v6 v6.2.33
 	sigs.k8s.io/yaml v1.2.0 // indirect
