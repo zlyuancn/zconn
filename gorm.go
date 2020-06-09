@@ -30,11 +30,11 @@ var _ IConnector = (*gormConnector)(nil)
 
 type gormConnector struct{}
 
-func (g *gormConnector) NewEmptyConfig() interface{} {
+func (*gormConnector) NewEmptyConfig() interface{} {
     return new(GormConfig)
 }
 
-func (g *gormConnector) Connect(config interface{}) (instance interface{}, err error) {
+func (*gormConnector) Connect(config interface{}) (instance interface{}, err error) {
     conf := config.(*GormConfig)
     c, err := gorm.Open(conf.Driver, conf.Source)
     if err != nil {
@@ -55,7 +55,7 @@ func (g *gormConnector) Connect(config interface{}) (instance interface{}, err e
     return c, nil
 }
 
-func (g *gormConnector) Close(instance interface{}) error {
+func (*gormConnector) Close(instance interface{}) error {
     c := instance.(*gorm.DB)
     return c.Close()
 }

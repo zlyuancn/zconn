@@ -32,11 +32,11 @@ var _ IConnector = (*xormConnector)(nil)
 
 type xormConnector struct{}
 
-func (x *xormConnector) NewEmptyConfig() interface{} {
+func (*xormConnector) NewEmptyConfig() interface{} {
     return new(XormConfig)
 }
 
-func (x *xormConnector) Connect(config interface{}) (instance interface{}, err error) {
+func (*xormConnector) Connect(config interface{}) (instance interface{}, err error) {
     conf := config.(*XormConfig)
     engine, err := xorm.NewEngine(conf.Driver, conf.Source)
     if err != nil {
@@ -55,7 +55,7 @@ func (x *xormConnector) Connect(config interface{}) (instance interface{}, err e
     return engine, nil
 }
 
-func (x *xormConnector) Close(instance interface{}) error {
+func (*xormConnector) Close(instance interface{}) error {
     engine := instance.(*xorm.Engine)
     return engine.Close()
 }
