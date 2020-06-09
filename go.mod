@@ -9,7 +9,7 @@ require (
 	github.com/lib/pq v1.1.1
 	github.com/mattn/go-sqlite3 v2.0.3+incompatible
 	github.com/mitchellh/mapstructure v1.1.2
-	github.com/olivere/elastic/v7 v7.0.17 // indirect
+	github.com/olivere/elastic/v7 v7.0.17
 	github.com/spf13/viper v1.7.0
 	xorm.io/xorm v1.0.1
 )
