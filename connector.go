@@ -30,6 +30,7 @@ const (
     // 在这里定义连接器类型
     Xorm ConnType = "xorm"
     Gorm          = "gorm"
+    Es6           = "es6"
     Es7           = "es7"
 )
 
@@ -41,6 +42,7 @@ func init() {
     // 在这里注册连接器
     RegistryConnector(Xorm, new(xormConnector))
     RegistryConnector(Gorm, new(gormConnector))
+    RegistryConnector(Es6, new(es6Connector))
     RegistryConnector(Es7, new(es7Connector))
 }
 
