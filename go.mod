@@ -16,6 +16,7 @@ require (
 	github.com/mitchellh/mapstructure v1.1.2
 	github.com/olivere/elastic v6.2.33+incompatible // indirect
 	github.com/olivere/elastic/v7 v7.0.17
+	github.com/seefan/gossdb v1.1.2
 	github.com/spf13/viper v1.7.0
 	github.com/zlyuancn/zmongo v0.0.0-20200514024631-d1974387d01e
 	go.etcd.io/etcd v3.3.22+incompatible

@@ -35,6 +35,7 @@ const (
     Etcd3                  = "etcd"
     Mongo                  = "mongo"
     Redis                  = "redis"
+    Ssdb                   = "ssdb"
     KafkaProducer          = "kafka_producer"
 )
 
@@ -51,6 +52,7 @@ func init() {
     RegistryConnector(Etcd3, new(etcd3Connector))
     RegistryConnector(Mongo, new(mongoConnector))
     RegistryConnector(Redis, new(redisConnector))
+    RegistryConnector(Ssdb, new(ssdbConnector))
     RegistryConnector(KafkaProducer, new(kafkaProducerConnector))
 }
 
