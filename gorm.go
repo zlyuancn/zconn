@@ -26,15 +26,15 @@ type GormConfig struct {
     Ping            bool   // 开始连接时是否ping确认连接情况
 }
 
-var _ IConnector = (*GormConnector)(nil)
+var _ IConnector = (*gormConnector)(nil)
 
-type GormConnector struct{}
+type gormConnector struct{}
 
-func (g *GormConnector) NewEmptyConfig() interface{} {
+func (g *gormConnector) NewEmptyConfig() interface{} {
     return new(GormConfig)
 }
 
-func (g *GormConnector) Connect(config interface{}) (instance interface{}, err error) {
+func (g *gormConnector) Connect(config interface{}) (instance interface{}, err error) {
     conf := config.(*GormConfig)
     c, err := gorm.Open(conf.Driver, conf.Source)
     if err != nil {
@@ -55,7 +55,7 @@ func (g *GormConnector) Connect(config interface{}) (instance interface{}, err e
     return c, nil
 }
 
-func (g *GormConnector) Close(instance interface{}) error {
+func (g *gormConnector) Close(instance interface{}) error {
     c := instance.(*gorm.DB)
     return c.Close()
 }

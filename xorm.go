@@ -28,15 +28,15 @@ type XormConfig struct {
     Ping            bool   // 开始连接时是否ping确认连接情况
 }
 
-var _ IConnector = (*XormConnector)(nil)
+var _ IConnector = (*xormConnector)(nil)
 
-type XormConnector struct{}
+type xormConnector struct{}
 
-func (x *XormConnector) NewEmptyConfig() interface{} {
+func (x *xormConnector) NewEmptyConfig() interface{} {
     return new(XormConfig)
 }
 
-func (x *XormConnector) Connect(config interface{}) (instance interface{}, err error) {
+func (x *xormConnector) Connect(config interface{}) (instance interface{}, err error) {
     conf := config.(*XormConfig)
     engine, err := xorm.NewEngine(conf.Driver, conf.Source)
     if err != nil {
@@ -55,7 +55,7 @@ func (x *XormConnector) Connect(config interface{}) (instance interface{}, err e
     return engine, nil
 }
 
-func (x *XormConnector) Close(instance interface{}) error {
+func (x *xormConnector) Close(instance interface{}) error {
     engine := instance.(*xorm.Engine)
     return engine.Close()
 }

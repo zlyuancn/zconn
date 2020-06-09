@@ -38,8 +38,8 @@ func init() {
     connectorRegistry = make(map[ConnType]IConnector)
 
     // 在这里注册连接器
-    RegistryConnector(Xorm, new(XormConnector))
-    RegistryConnector(Gorm, new(GormConnector))
+    RegistryConnector(Xorm, new(xormConnector))
+    RegistryConnector(Gorm, new(gormConnector))
 }
 
 // 注册自定义连接器
