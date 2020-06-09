@@ -37,6 +37,7 @@ const (
     Redis                  = "redis"
     Ssdb                   = "ssdb"
     KafkaProducer          = "kafka_producer"
+    GrpcConn               = "grpc_conn"
 )
 
 var connectorRegistry map[ConnType]IConnector
@@ -54,6 +55,7 @@ func init() {
     RegistryConnector(Redis, new(redisConnector))
     RegistryConnector(Ssdb, new(ssdbConnector))
     RegistryConnector(KafkaProducer, new(kafkaProducerConnector))
+    RegistryConnector(GrpcConn, new(grpcConnConnector))
 }
 
 // 注册自定义连接器
