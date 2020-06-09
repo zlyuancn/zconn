@@ -3,6 +3,7 @@ module github.com/zlyuancn/zconn
 go 1.13
 
 require (
+	github.com/Shopify/sarama v1.19.0
 	github.com/coreos/etcd v3.3.22+incompatible // indirect
 	github.com/denisenkom/go-mssqldb v0.0.0-20191124224453-732737034ffd
 	github.com/dustin/go-humanize v1.0.0 // indirect
