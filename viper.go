@@ -20,6 +20,13 @@ const ConfigShardName = "zconn"
 type viperConfig map[ConnType]map[string]interface{}
 
 // 添加配置文件, 支持 json, ini, toml, yaml等
+//
+// toml示例:
+//   [zconn.es7.default]
+//   address=['http://127.0.0.1:9200']
+//   username='your_user'
+//   password='your_pwd'
+//
 func (m *Manager) AddFile(file string, filetype ...string) error {
     v := viper.New()
     v.SetConfigFile(file)
