@@ -23,6 +23,6 @@ type Option func(o *Options)
 // 获取时自动连接
 func WithGetAutoConnect(auto ...bool) Option {
 	return func(o *Options) {
-		o.GetAutoConnect = len(auto) > 0 && auto[0]
+		o.GetAutoConnect = len(auto) == 0 || auto[0]
 	}
 }
