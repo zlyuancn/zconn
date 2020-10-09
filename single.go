@@ -16,6 +16,13 @@ import (
 
 var singleManager = NewManager()
 
+// 设置单例管理器的选项
+func SetSingleManagerOptions(opts ...Option) {
+	for _, o := range opts {
+		o(singleManager.opts)
+	}
+}
+
 // 添加配置, 同一个conn类型中重复的conn名会被替换掉
 func AddConfig(conntype ConnType, config interface{}, conn_name ...string) {
 	singleManager.AddConfig(conntype, config, conn_name...)
