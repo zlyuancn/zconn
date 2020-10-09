@@ -124,6 +124,10 @@ func (m *Manager) GetConn(conntype ConnType, conn_name ...string) (conn *Conn, o
 		conn, ok = conns[makeConnName(conn_name...)]
 	}
 	m.mx.RUnlock()
+
+	if ok && m.opts.GetAutoConnect && !conn.IsConnect() {
+		_ = conn.Connect()
+	}
 	return
 }
 
