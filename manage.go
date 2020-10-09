@@ -35,7 +35,7 @@ type Manager struct {
 func NewManager(opts ...Option) *Manager {
 	manager := &Manager{
 		storage: make(map[ConnType]Conns),
-		opts:    new(Options),
+		opts:    newOptions(),
 	}
 
 	for _, o := range opts {

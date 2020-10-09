@@ -12,6 +12,12 @@ type Options struct {
 	GetAutoConnect bool
 }
 
+func newOptions() *Options {
+	return &Options{
+		GetAutoConnect: true,
+	}
+}
+
 type Option func(o *Options)
 
 // 获取时自动连接
