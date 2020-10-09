@@ -28,12 +28,18 @@ const DefaultConnName = "default"
 type Manager struct {
 	storage map[ConnType]Conns
 	mx      sync.RWMutex
+	opts    *Options
 }
 
 // 创建一个管理器
 func NewManager(opts ...Option) *Manager {
 	manager := &Manager{
 		storage: make(map[ConnType]Conns),
+		opts:    new(Options),
+	}
+
+	for _, o := range opts {
+		o(manager.opts)
 	}
 
 	return manager
