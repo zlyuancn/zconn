@@ -21,7 +21,7 @@ require (
 	github.com/seefan/gossdb v1.1.2
 	github.com/spf13/viper v1.7.0
 	github.com/zlyuancn/zmongo v0.0.0-20200514024631-d1974387d01e
-	go.etcd.io/etcd v3.3.22+incompatible
+	go.etcd.io/etcd v3.3.25+incompatible
 	google.golang.org/grpc v1.22.1
 	gopkg.in/olivere/elastic.v6 v6.2.33
 	sigs.k8s.io/yaml v1.2.0 // indirect
