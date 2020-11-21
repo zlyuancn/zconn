@@ -62,12 +62,7 @@ func (m *Manager) AddConfig(conntype ConnType, config interface{}, conn_name ...
 	oldConn = conns[name]
 
 	// 设置新的配置
-	conns[name] = &Conn{
-		conntype:   conntype,
-		instance:   nil,
-		config:     makeConfigPtr(config),
-		is_connect: false,
-	}
+	conns[name] = newConn(conntype, makeConfigPtr(config))
 
 	m.mx.Unlock()
 
@@ -103,28 +98,27 @@ func (m *Manager) Remove(conntype ConnType, conn_name ...string) {
 // 连接所有
 func (m *Manager) ConnectAll() error {
 	m.mx.Lock()
+	defer m.mx.Unlock()
 	for _, conns := range m.storage {
 		for conn_name, conn := range conns {
 			if err := conn.Connect(); err != nil {
-				m.mx.Unlock()
 				return fmt.Errorf("[%s.%s], %s", conn.Type(), conn_name, err)
 			}
 		}
 	}
-	m.mx.Unlock()
 	return nil
 }
 
 // 关闭所有连接
 func (m *Manager) CloseAll() {
 	m.mx.Lock()
+	defer m.mx.Unlock()
 	for _, conns := range m.storage {
 		for _, conn := range conns {
 			_ = conn.Close()
 		}
 	}
 	m.storage = make(map[ConnType]Conns)
-	m.mx.Unlock()
 }
 
 // 获取Conn
@@ -136,7 +130,7 @@ func (m *Manager) GetConn(conntype ConnType, conn_name ...string) (conn *Conn, o
 	}
 	m.mx.RUnlock()
 
-	if ok && m.opts.GetAutoConnect && !conn.IsConnect() {
+	if ok && m.opts.GetAutoConnect {
 		_ = conn.Connect()
 	}
 	return
