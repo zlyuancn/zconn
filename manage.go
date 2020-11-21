@@ -49,6 +49,8 @@ func NewManager(opts ...Option) *Manager {
 func (m *Manager) AddConfig(conntype ConnType, config interface{}, conn_name ...string) {
 	name := makeConnName(conn_name...)
 
+	var oldConn *Conn
+
 	m.mx.Lock()
 
 	conns, ok := m.storage[conntype]
@@ -57,10 +59,7 @@ func (m *Manager) AddConfig(conntype ConnType, config interface{}, conn_name ...
 		m.storage[conntype] = conns
 	}
 
-	// 关闭之前的连接
-	if conn, ok := conns[name]; ok {
-		_ = conn.Close()
-	}
+	oldConn = conns[name]
 
 	// 设置新的配置
 	conns[name] = &Conn{
@@ -71,22 +70,34 @@ func (m *Manager) AddConfig(conntype ConnType, config interface{}, conn_name ...
 	}
 
 	m.mx.Unlock()
+
+	// 关闭之前的连接
+	if oldConn != nil {
+		_ = oldConn.Close()
+	}
 }
 
-// 移除, 移除之前会关闭连接
+// 移除, 移除后会自动关闭连接
 func (m *Manager) Remove(conntype ConnType, conn_name ...string) {
 	name := makeConnName(conn_name...)
+
+	var oldConns []*Conn
 
 	m.mx.Lock()
 
 	if conns, ok := m.storage[conntype]; ok {
 		if conn, ok := conns[name]; ok {
-			_ = conn.Close()
+			oldConns = append(oldConns, conn)
 			delete(conns, name)
 		}
 	}
 
 	m.mx.Unlock()
+
+	// 关闭之前的连接
+	for _, conn := range oldConns {
+		_ = conn.Close()
+	}
 }
 
 // 连接所有
