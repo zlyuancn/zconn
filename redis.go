@@ -9,11 +9,12 @@
 package zconn
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"time"
 
-	"github.com/go-redis/redis"
+	"github.com/go-redis/redis/v8"
 )
 
 type redisConnector struct{}
@@ -65,7 +66,7 @@ func (*redisConnector) Connect(config interface{}) (instance interface{}, err er
 	}
 
 	if conf.Ping {
-		if _, err := c.Ping().Result(); err != nil {
+		if _, err := c.Ping(context.Background()).Result(); err != nil {
 			return nil, fmt.Errorf("ping失败: %s", err)
 		}
 	}

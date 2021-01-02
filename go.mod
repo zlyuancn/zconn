@@ -7,7 +7,7 @@ require (
 	github.com/coreos/etcd v3.3.22+incompatible // indirect
 	github.com/denisenkom/go-mssqldb v0.0.0-20191124224453-732737034ffd
 	github.com/dustin/go-humanize v1.0.0 // indirect
-	github.com/go-redis/redis v6.15.8+incompatible
+	github.com/go-redis/redis/v8 v8.4.4
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/google/uuid v1.1.1 // indirect
 	github.com/grpc-ecosystem/go-grpc-middleware v1.0.0
